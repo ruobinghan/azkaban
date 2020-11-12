@@ -14,5 +14,6 @@
     <orderEntry type="library" name="Maven: org.eclipse.jgit:org.eclipse.jgit:5.9.0.202009080501-r" level="project" />
     <orderEntry type="library" name="Maven: com.googlecode.javaewah:JavaEWAH:1.1.7" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.2" level="project" />
+    <orderEntry type="library" name="Maven: org.yaml:snakeyaml:1.25" level="project" />
   </component>
 </module>

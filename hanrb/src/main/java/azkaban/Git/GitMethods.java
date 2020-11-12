@@ -1,5 +1,6 @@
-package azkaban;
+package azkaban.Git;
 
+import azkaban.Param.Param;
 import org.eclipse.jgit.api.*;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
@@ -7,18 +8,28 @@ import java.io.File;
 import java.io.IOException;
 
 public class GitMethods {
-    public static String remotePath = "https://github.com/ruobinghan/azkaban2.git";//远程库路径
-    public static String localPath = "D:\\GitProject\\";//下载已有仓库到本地路径
-    public static String initPath = "D:\\test\\";//本地路径新建
-    public static String username="597759884@qq.com";
-    public static String password="13904524006hrb";
+    private  String remotePath;
+    private  String localPath;
+    private  String username;
+    private  String password;
+    private  String projectName;
+
+    public GitMethods(String remotePath, String username, String password,String projectName) {
+        this.remotePath = remotePath;
+        this.localPath = Param.rootPath;
+        this.username = username;
+        this.password = password;
+        this.projectName=projectName;
+    }
 
     /**
      * 拉取git仓库代码
      * @throws IOException
      * @throws GitAPIException
      */
-    public static void gitClone() throws IOException, GitAPIException {
+
+
+    public  void Clone() throws IOException, GitAPIException {
 
         cleanDir(localPath);
         //设置远程服务器上的用户名和密码
@@ -37,11 +48,11 @@ public class GitMethods {
     }
 
     /**
-     * 清空指定文件夹下的文件
-     * @param filePath
+     * 清空指定目录下的文件
+     * @param filePath 指定所清空的目录
      * @return
      */
-    public static boolean cleanDir(String filePath) {
+    public  boolean cleanDir(String filePath) {
         boolean flag = true;
         if(filePath != null) {
             File file = new File(filePath);
@@ -69,13 +80,16 @@ public class GitMethods {
         }
         return flag;
     }
-
-    public static void execCMD(){
+    //打jar包
+    public  void Package(){
         Runtime runtime=Runtime.getRuntime();
 
         try {
-            runtime.exec("cmd /k cd D:\\GitProject && mvn package");
-        } catch (IOException e) {
+            runtime.exec("cmd /k cd D:\\GitProject\\GitClone && mvn compile");
+            runtime.exec("cmd /k cd "+localPath+projectName+" && mvn clean package");
+            Thread.currentThread().sleep(5000);//毫秒   
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
