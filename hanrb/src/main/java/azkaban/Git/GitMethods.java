@@ -14,13 +14,6 @@ public class GitMethods {
     private  String password;
     private  String projectName;
 
-    public GitMethods(String remotePath, String username, String password,String projectName) {
-        this.remotePath = remotePath;
-        this.localPath = Param.rootPath;
-        this.username = username;
-        this.password = password;
-        this.projectName=projectName;
-    }
 
     /**
      * 拉取git仓库代码
@@ -86,10 +79,11 @@ public class GitMethods {
 
         try {
             runtime.exec("cmd /k cd D:\\GitProject\\GitClone && mvn compile");
-            runtime.exec("cmd /k cd "+localPath+projectName+" && mvn clean package");
-            Thread.currentThread().sleep(5000);//毫秒   
-
+            runtime.exec("cmd /k cd D:\\GitProject\\GitClone\\hanrb && mvn clean package");
+            //Thread.currentThread().sleep(5000);//毫秒   
+            System.out.println("打包完成");
         } catch (Exception e) {
+            System.out.println("打包失败");
             e.printStackTrace();
         }
     }

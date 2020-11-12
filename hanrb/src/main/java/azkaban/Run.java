@@ -10,12 +10,13 @@ public class Run {
         String remotePath = "https://github.com/ruobinghan/azkaban.git";//远程库路径
         String username="597759884@qq.com";
         String password="13904524006hrb";
+        String projectName="hanrb";
 
 
         try{
-            GitMethods git= new GitMethods(remotePath,username,password);
-            git.Clone();
-            git.Package();
+//            GitMethods git= new GitMethods(remotePath,username,password,projectName);
+//            git.Clone();
+//            git.Package();
            // YMLMethods.creatYML();
 
 //            ZipMethods.creatZipPackage();

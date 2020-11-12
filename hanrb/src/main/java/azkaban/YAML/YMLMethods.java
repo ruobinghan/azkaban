@@ -13,12 +13,12 @@ import java.util.*;
 
 public class YMLMethods {
 
-    private static String filePath= Param.rootPath+ Param.flowName;
+    private  String filePath= Param.rootPath+ Param.flowName;
 
     /**
      * 生成yaml文件
      */
-    public  static  void creatYML(){
+    public void creatYML(){
 
 
         DumperOptions options = new DumperOptions();
@@ -56,7 +56,7 @@ public class YMLMethods {
      * 将指定内容写到磁盘指定文件上
      * @param content
      */
-    public static void saveAsFileWriter(String content) {
+    public  void saveAsFileWriter(String content) {
         FileWriter fwriter = null;
         try {
             // true表示不覆盖原来的内容，而是加到文件的后面。若要覆盖原来的内容，直接省略这个参数就好
