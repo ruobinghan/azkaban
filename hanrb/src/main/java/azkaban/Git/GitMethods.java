@@ -1,6 +1,6 @@
 package azkaban.Git;
 
-import azkaban.Param.Param;
+import azkaban.Base.PathParam;
 import org.eclipse.jgit.api.*;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
@@ -13,15 +13,22 @@ public class GitMethods {
     private  String username;
     private  String password;
     private  String projectName;
+    private  String branch;
 
+    public GitMethods(String remotePath, String username, String password,String projectName,String branch) {
+        this.localPath= PathParam.gitProjectPath;
+        this.remotePath = remotePath;
+        this.username = username;
+        this.password = password;
+        this.projectName = projectName;
+        this.branch=branch;
+    }
 
     /**
      * 拉取git仓库代码
      * @throws IOException
      * @throws GitAPIException
      */
-
-
     public  void Clone() throws IOException, GitAPIException {
 
         cleanDir(localPath);
@@ -32,7 +39,7 @@ public class GitMethods {
         CloneCommand cloneCommand = Git.cloneRepository();
 
         Git git = cloneCommand.setURI(remotePath) //设置远程URI
-                .setBranch("master") //设置clone下来的分支
+                .setBranch(branch) //设置clone下来的分支
                 .setDirectory(new File(localPath)) //设置下载存放路径
                 .setCredentialsProvider(usernamePasswordCredentialsProvider) //设置权限验证
                 .call();
@@ -45,7 +52,7 @@ public class GitMethods {
      * @param filePath 指定所清空的目录
      * @return
      */
-    public  boolean cleanDir(String filePath) {
+    public static boolean cleanDir(String filePath) {
         boolean flag = true;
         if(filePath != null) {
             File file = new File(filePath);
@@ -74,12 +81,12 @@ public class GitMethods {
         return flag;
     }
     //打jar包
-    public  void Package(){
+    public void Package(){
         Runtime runtime=Runtime.getRuntime();
 
         try {
-            runtime.exec("cmd /k cd D:\\GitProject\\GitClone && mvn compile");
-            runtime.exec("cmd /k cd D:\\GitProject\\GitClone\\hanrb && mvn clean package");
+            runtime.exec("cmd /k cd "+ PathParam.gitProjectPath+"e && mvn compile");
+            runtime.exec("cmd /k cd "+ PathParam.gitProjectPath+projectName+" && mvn clean package");
             //Thread.currentThread().sleep(5000);//毫秒   
             System.out.println("打包完成");
         } catch (Exception e) {

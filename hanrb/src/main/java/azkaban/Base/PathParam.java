@@ -1,8 +1,6 @@
-package azkaban.Param;
+package azkaban.Base;
 
-import java.util.zip.GZIPInputStream;
-
-public class Param {
+public class PathParam {
     //文件根路径
     public static String rootPath="D:\\GitProject\\";
 
@@ -13,11 +11,13 @@ public class Param {
     public static String zipPath=rootPath+"ZipFiles\\";
 
     //flow文件名
-    public static String flowName="test.flow";
+    public static String flowName="azkaban.flow";
 
     //zip包名；
     public static String zipName= "zip4Azkaban";
 
+    //指定jar包名
+    public static String azkabanJarName= "project.jar";
 
 
 

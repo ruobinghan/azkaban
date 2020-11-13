@@ -1,6 +1,6 @@
 package azkaban.Zip;
 
-import azkaban.Param.Param;
+import azkaban.Base.PathParam;
 
 import java.io.*;
 import java.util.zip.ZipEntry;
@@ -8,24 +8,37 @@ import java.util.zip.ZipOutputStream;
 
 
 public class ZipMethods {
-    public static String jarPath="D:\\GitProject\\GitClone\\hanrb\\target\\hanrb-1.0.0.jar";
-    public static String zipPath= Param.rootPath;
-    public static String zipName= Param.zipName;
+    public  String jarPath;
+    public  String zipPath;
+    public  String zipName;
 
+    public ZipMethods(String projectName){
+        zipPath= PathParam.zipPath;
+        zipName= PathParam.zipName;
+        JarMethods jar=new JarMethods(projectName);
+        if(jar.getJarNameAndPath()&&jar.renameJar()){
+            jarPath=jar.getJarPath()+jar.getJarName();
+            System.out.println("zip包资源准备成功");
+        }
+        else{
+            System.out.println("zip包资源准备失败");
+        }
+    }
     /**
      * 将yaml文件和jar包压缩成zip包
      */
-    public static void  creatZipPackage(){
-        moveFile(jarPath);
-        fileToZip(zipPath,zipPath,zipName);
-
+    public void creatZipPackage(){
+        if(jarPath!=null){
+            moveFile(jarPath);
+            //fileToZip(zipPath,zipPath,zipName);
+        }
     }
 
     /**
      * 将jar包复制到指定目录下
      * @param filePath jar包文件路径
      */
-    public static void moveFile(String filePath){
+    public  void moveFile(String filePath){
         //获取源文件的名称
         String newFileName = filePath.substring(filePath.lastIndexOf("\\")+1); //目标文件地址
         System.out.println("源文件:"+newFileName);
@@ -59,7 +72,7 @@ public class ZipMethods {
      * @param fileName 指定压缩包名称
      * @return 是否压缩成功
      */
-    public static boolean fileToZip(String sourceFilePath,String zipFilePath,String fileName){
+    public  boolean fileToZip(String sourceFilePath,String zipFilePath,String fileName){
         boolean flag = false;
         File sourceFile = new File(sourceFilePath);
         FileInputStream fis = null;
