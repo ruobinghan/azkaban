@@ -23,15 +23,15 @@ public class Run {
         String projectName="hanrb";
         String branch="master";
 
-
         try{
             GitMethods git= new GitMethods(remotePath,username,password,projectName,branch);
             YMLMethods yml= new YMLMethods();
             ZipMethods zip=new ZipMethods();
-//            git.Clone();
-//            git.Package();
+
+            git.Clone();
+            git.Package();
             Node n1=yml.creatNode("a1","b1","c1","d1");
-            Node n2=yml.creatNode("a2","b2","c2","d2","e3");
+            Node n2=yml.creatNode("a2","b2","c2","d2","e4");
 
             yml.setNodeList(n1);
             yml.setNodeList(n2);
@@ -40,10 +40,8 @@ public class Run {
                 zip.creatZipPackage(yml);
             }
 
-
-
         }catch (Exception e){
-
+            e.printStackTrace();
         }
     }
 }

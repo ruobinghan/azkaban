@@ -1,6 +1,7 @@
 package azkaban.Git;
 
 import azkaban.Base.PathParam;
+import azkaban.Base.UDF;
 import org.eclipse.jgit.api.*;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
@@ -31,7 +32,7 @@ public class GitMethods {
      */
     public  void Clone() throws IOException, GitAPIException {
 
-        cleanDir(localPath);
+        UDF.cleanDir(localPath);
         //设置远程服务器上的用户名和密码
         UsernamePasswordCredentialsProvider usernamePasswordCredentialsProvider =new UsernamePasswordCredentialsProvider(username,password);
 

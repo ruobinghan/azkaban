@@ -29,12 +29,12 @@ public class UDF {
             }
 
         }else {
-            System.out.println("清空目标目录失败！！！");
+            System.out.println("清空 "+filePath+"失败！！！");
             flag = false;
         }
 
         if(flag==true){
-            System.out.println("清空目标目录成功");
+            System.out.println("清空 "+filePath+"成功!");
         }
         return flag;
     }
@@ -50,7 +50,6 @@ public class UDF {
         }catch (Exception e){
             e.printStackTrace();
         }
-
     }
 
     /**将指定内容写入文件*/

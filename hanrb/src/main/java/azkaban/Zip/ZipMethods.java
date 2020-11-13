@@ -18,15 +18,21 @@ public class ZipMethods {
     public  String zipName;
 
     public ZipMethods(){
-        zipPath= PathParam.zipPath;
-        zipName= PathParam.zipName;
-
+        zipPath=PathParam.zipPath;
+        zipName=PathParam.zipName;
     }
+
     public boolean prepareZip(String projectName){
         JarMethods jar=new JarMethods(projectName);
-        while(jar.getJarNameAndPath()==false){
-            System.out.println("未找到指定jar包，waiting……");
+        try{
+            while(jar.getJarNameAndPath()==false){
+                System.out.println("等待jar包完成，waiting……");
+                Thread.sleep(  2000);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
+
         if(jar.getJarsize()==-1){
             return false;
         }
@@ -37,6 +43,7 @@ public class ZipMethods {
 
         if(jar.renameJar()){
             jarPath=jar.getJarPath()+jar.getJarName();
+            System.out.println("jarpath: "+jarPath);
             System.out.println("zip包资源准备成功！");
             return true;
         }
@@ -51,11 +58,11 @@ public class ZipMethods {
     public void creatZipPackage(YMLMethods yml) throws IOException{
         try {
             if(jarPath!=null) {
-                UDF.cleanDir(zipPath);
-                UDF.createFile(zipPath, PathParam.flowName);
+                UDF.cleanDir(PathParam.zipPath);
+                UDF.createFile(PathParam.zipPath, PathParam.flowName);
                 yml.creatYML();
                 moveFile(jarPath);
-                //fileToZip(zipPath,zipPath,zipName);
+                fileToZip(zipPath,zipPath,zipName);
             }
         }catch (IOException e){
             e.printStackTrace();
@@ -71,12 +78,12 @@ public class ZipMethods {
         //获取源文件的名称
         String newFileName = filePath.substring(filePath.lastIndexOf("\\")+1); //目标文件地址
         System.out.println("源文件:"+newFileName);
-        zipPath = zipPath + File.separator + newFileName; //源文件地址
-        System.out.println("目标文件地址:"+zipPath);
+        String zipNameWithPath = zipPath + File.separator + newFileName; //源文件地址
+        System.out.println("目标文件地址:"+zipNameWithPath);
         try
         {
             FileInputStream fis = new FileInputStream(filePath);//创建输入流对象
-            FileOutputStream fos = new FileOutputStream(zipPath); //创建输出流对象
+            FileOutputStream fos = new FileOutputStream(zipNameWithPath); //创建输出流对象
             byte datas[] = new byte[1024*8];//创建搬运工具
             int len = 0;//创建长度
             while((len = fis.read(datas))!=-1)//循环读取数据
