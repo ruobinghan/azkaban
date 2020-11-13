@@ -1,8 +1,11 @@
 package azkaban;
 
 
+import azkaban.Base.PathParam;
+import azkaban.Base.UDF;
 import azkaban.Git.GitMethods;
 import azkaban.YAML.Bean.Node;
+import azkaban.YAML.Bean.Param;
 import azkaban.YAML.YMLMethods;
 import azkaban.Zip.JarMethods;
 import azkaban.Zip.ZipMethods;
@@ -24,18 +27,20 @@ public class Run {
         try{
             GitMethods git= new GitMethods(remotePath,username,password,projectName,branch);
             YMLMethods yml= new YMLMethods();
+            ZipMethods zip=new ZipMethods();
 //            git.Clone();
 //            git.Package();
-//            Node n1=yml.creatNode("a1","b1","c1","d1");
-//            Node n2=yml.creatNode("a2","b2","c2","d2","e1");
-//            List<Map>nodeList=new LinkedList<Map>();
-//            nodeList.add(n1.getMap());
-//            nodeList.add(n2.getMap());
+            Node n1=yml.creatNode("a1","b1","c1","d1");
+            Node n2=yml.creatNode("a2","b2","c2","d2","e3");
 
-//            yml.creatYML(nodeList);
+            yml.setNodeList(n1);
+            yml.setNodeList(n2);
 
-            ZipMethods zip=new ZipMethods(projectName);
-            zip.creatZipPackage();
+            if(zip.prepareZip(projectName)){
+                zip.creatZipPackage(yml);
+            }
+
+
 
         }catch (Exception e){
 

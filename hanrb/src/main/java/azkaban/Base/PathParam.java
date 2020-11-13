@@ -16,8 +16,11 @@ public class PathParam {
     //zip包名；
     public static String zipName= "zip4Azkaban";
 
-    //指定jar包名
+    //jar包名
     public static String azkabanJarName= "project.jar";
+
+    //yaml文件名
+    public static String ymlName="azkaban.flow";
 
 
 

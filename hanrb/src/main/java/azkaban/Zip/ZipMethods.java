@@ -1,8 +1,13 @@
 package azkaban.Zip;
 
 import azkaban.Base.PathParam;
+import azkaban.Base.UDF;
+import azkaban.YAML.YMLMethods;
+import javafx.scene.chart.ScatterChart;
 
 import java.io.*;
+import java.util.List;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -12,26 +17,50 @@ public class ZipMethods {
     public  String zipPath;
     public  String zipName;
 
-    public ZipMethods(String projectName){
+    public ZipMethods(){
         zipPath= PathParam.zipPath;
         zipName= PathParam.zipName;
+
+    }
+    public boolean prepareZip(String projectName){
         JarMethods jar=new JarMethods(projectName);
-        if(jar.getJarNameAndPath()&&jar.renameJar()){
+        while(jar.getJarNameAndPath()==false){
+            System.out.println("未找到指定jar包，waiting……");
+        }
+        if(jar.getJarsize()==-1){
+            return false;
+        }
+        while(jar.getJarsize()==0){
+            System.out.println("准备jar包中……");
+        }
+        System.out.println("准备jar包完成！");
+
+        if(jar.renameJar()){
             jarPath=jar.getJarPath()+jar.getJarName();
-            System.out.println("zip包资源准备成功");
+            System.out.println("zip包资源准备成功！");
+            return true;
         }
         else{
-            System.out.println("zip包资源准备失败");
+            System.out.println("zip包资源准备失败！");
+            return false;
         }
     }
     /**
      * 将yaml文件和jar包压缩成zip包
      */
-    public void creatZipPackage(){
-        if(jarPath!=null){
-            moveFile(jarPath);
-            //fileToZip(zipPath,zipPath,zipName);
+    public void creatZipPackage(YMLMethods yml) throws IOException{
+        try {
+            if(jarPath!=null) {
+                UDF.cleanDir(zipPath);
+                UDF.createFile(zipPath, PathParam.flowName);
+                yml.creatYML();
+                moveFile(jarPath);
+                //fileToZip(zipPath,zipPath,zipName);
+            }
+        }catch (IOException e){
+            e.printStackTrace();
         }
+
     }
 
     /**

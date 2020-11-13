@@ -25,6 +25,18 @@ public class JarMethods {
     public JarMethods (String projectName){
         projectPath=PathParam.gitProjectPath+projectName;
     }
+    public long getJarsize(){
+        File file = new File(jarNameWithPath);
+        if (file.exists() && file.isFile()) {
+            String fileName = file.getName();
+            System.out.println("文件"+jarName+"的大小是："+file.length());
+            return file.length();
+        }
+        else{
+            System.out.println("jar包不存在");
+            return -1;
+        }
+    }
 
     public boolean getJarNameAndPath(){
         File dir=new File(projectPath);
@@ -50,6 +62,7 @@ public class JarMethods {
         File file=new File(jarPath + jarName);
         if (file.renameTo(new File(jarPath+PathParam.azkabanJarName))) {
             System.out.println("重命名jar包成功! newName："+PathParam.azkabanJarName);
+            jarName=PathParam.azkabanJarName;
             return true;
         }
         else{
