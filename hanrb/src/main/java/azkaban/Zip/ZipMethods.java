@@ -2,6 +2,7 @@ package azkaban.Zip;
 
 import azkaban.Base.PathParam;
 import azkaban.Base.UDF;
+import azkaban.Version.CreateVersionProject;
 import azkaban.YAML.YMLMethods;
 import javafx.scene.chart.ScatterChart;
 
@@ -59,7 +60,10 @@ public class ZipMethods {
         try {
             if(jarPath!=null) {
                 UDF.cleanDir(PathParam.zipPath);
+
                 UDF.createFile(PathParam.zipPath, PathParam.flowName);
+                CreateVersionProject cvp = new CreateVersionProject();
+                cvp.wrtieVersionProject();
                 yml.creatYML();
                 moveFile(jarPath);
                 fileToZip(zipPath,zipPath,zipName);
