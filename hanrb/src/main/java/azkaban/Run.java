@@ -4,6 +4,7 @@ package azkaban;
 import azkaban.Base.PathParam;
 import azkaban.Base.UDF;
 import azkaban.Git.GitMethods;
+import azkaban.Web.Chrome;
 import azkaban.YAML.Bean.Node;
 import azkaban.YAML.Bean.Param;
 import azkaban.YAML.YMLMethods;
@@ -39,6 +40,8 @@ public class Run {
             if(zip.prepareZip(projectName)){
                 zip.creatZipPackage(yml);
             }
+            Chrome chrome= new Chrome();
+            chrome.Upload();
 
         }catch (Exception e){
             e.printStackTrace();
