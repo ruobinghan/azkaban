@@ -4,6 +4,7 @@ package azkaban;
 import azkaban.Base.PathParam;
 import azkaban.Base.UDF;
 import azkaban.Git.GitMethods;
+import azkaban.Version.CreateVersionProject;
 import azkaban.YAML.Bean.Node;
 import azkaban.YAML.Bean.Param;
 import azkaban.YAML.YMLMethods;
@@ -28,6 +29,8 @@ public class Run {
             YMLMethods yml= new YMLMethods();
             ZipMethods zip=new ZipMethods();
 
+
+
             git.Clone();
             git.Package();
             Node n1=yml.creatNode("a1","command","d1");
@@ -37,8 +40,10 @@ public class Run {
             yml.setNodeList(n2);
 
             if(zip.prepareZip(projectName)){
+
                 zip.creatZipPackage(yml);
             }
+
 
         }catch (Exception e){
             e.printStackTrace();

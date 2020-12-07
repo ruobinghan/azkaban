@@ -9,7 +9,7 @@
         <module name="hanrb" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.8">
+    <bytecodeTargetLevel>
       <module name="hanrb" target="1.5" />
     </bytecodeTargetLevel>
   </component>

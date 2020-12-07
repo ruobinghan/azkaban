@@ -22,6 +22,9 @@ public class PathParam {
     //yaml文件名
     public static String ymlName="azkaban.flow";
 
+    //version文件名
+    public static String versionPath=zipPath+"version.project";
+
 
 
 }
