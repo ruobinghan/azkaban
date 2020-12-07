@@ -30,8 +30,8 @@ public class Run {
 
             git.Clone();
             git.Package();
-            Node n1=yml.creatNode("a1","b1","c1","d1");
-            Node n2=yml.creatNode("a2","b2","c2","d2","e4");
+            Node n1=yml.creatNode("a1","command","d1");
+            Node n2=yml.creatNode("a2","command","d2","a1");
 
             yml.setNodeList(n1);
             yml.setNodeList(n2);

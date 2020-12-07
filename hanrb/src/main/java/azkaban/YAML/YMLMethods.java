@@ -20,14 +20,14 @@ public class YMLMethods {
         nodeList=new LinkedList<Map>();
     }
 
-    public Node creatNode(String nameStr,String typeStr,String configStr ,String commandStr,String dependsOnStr){
+    public Node creatNode(String nameStr,String typeStr,String commandStr,String dependsOnStr){
         Command command=new Command(commandStr);
         Config config=new Config(command);
         DependsOn dependsOn=new DependsOn(dependsOnStr);
         Node node =new Node(nameStr,typeStr,config,dependsOn);
         return node;
     }
-    public Node creatNode(String nameStr,String typeStr,String configStr ,String commandStr){
+    public Node creatNode(String nameStr,String typeStr ,String commandStr){
         Command command=new Command(commandStr);
         Config config=new Config(command);
         Node node =new Node(nameStr,typeStr,config);
