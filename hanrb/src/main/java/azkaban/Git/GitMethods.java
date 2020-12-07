@@ -86,7 +86,7 @@ public class GitMethods {
         Runtime runtime=Runtime.getRuntime();
 
         try {
-            runtime.exec("cmd /k cd "+ PathParam.gitProjectPath+"e && mvn compile");
+            runtime.exec("cmd /k cd "+ PathParam.gitProjectPath+projectName+"e && mvn compile");
             runtime.exec("cmd /k cd "+ PathParam.gitProjectPath+projectName+" && mvn clean package");
             //Thread.currentThread().sleep(5000);//毫秒   
             System.out.println("打包完成");
