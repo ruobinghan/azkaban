@@ -1,5 +1,6 @@
 azkaban\Git\GitMethods.class
 azkaban\YAML\Bean\Param.class
+azkaban\Base\WebParam.class
 azkaban\YAML\Bean\Config.class
 azkaban\Base\PathParam.class
 azkaban\Base\UDF.class
@@ -11,4 +12,5 @@ azkaban\Zip\FileFilterBySuffix.class
 azkaban\Zip\ZipMethods.class
 azkaban\YAML\Bean\Node.class
 azkaban\YAML\YMLMethods.class
+azkaban\Web\Chrome.class
 azkaban\YAML\Bean\Command.class
